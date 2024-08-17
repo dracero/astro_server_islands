@@ -12,13 +12,13 @@ const isInLanus = await getIsInLanus();
 <Layout title="Astro Server Islands">
   <section>
     <h1>Astro Server Islands</h1>
-    {isInLanus ? (
+   <!-- {isInLanus ? ( --> 
       <Quote server:defer>
         <Fallback slot="fallback"/>
       </Quote>
-    ) : (
+   <!--  ) : (
       <p>No estás en Lanús.</p>
-    )}
+    )}-->
     <Panel/>
   </section>
 </Layout>

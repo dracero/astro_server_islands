@@ -3,11 +3,8 @@ import Fallback from '../components/Fallback.astro';
 import Panel from '../components/Panel.astro';
 import Quote from '../components/Quote.astro';
 import Layout from '../layouts/Layout.astro';
-import { getIsInLanus } from '../components/Location.astro';
-
-// Espera a que la función asincrónica se resuelva
-const isInLanus = await getIsInLanus();
 ---
+
 <script>
     // Función para obtener la ubicación
     async function getIsInLanus() {
@@ -19,11 +16,11 @@ const isInLanus = await getIsInLanus();
     // Llama a la función al cargar la página
     window.onload = async () => {
         const isInLanus = await getIsInLanus();
+        const messageElement = document.getElementById('location-message');
         if (isInLanus) {
-            console.log("Estás en Lanús");
-            // Aquí puedes agregar más lógica si es necesario
+            messageElement.textContent = "Estás en Lanús";
         } else {
-            console.log("No estás en Lanús");
+            messageElement.textContent = "No estás en Lanús";
         }
     };
 </script>
@@ -31,13 +28,10 @@ const isInLanus = await getIsInLanus();
 <Layout title="Astro Server Islands">
   <section>
     <h1>Astro Server Islands</h1>
-   {isInLanus ? ( 
       <Quote server:defer>
         <Fallback slot="fallback"/>
       </Quote>
-    ) : (
-      <p>No estás en Lanús.</p>
-    )}
+      <div id="location-message"></div> <!-- Elemento para mostrar el mensaje -->
     <Panel/>
   </section>
 </Layout>

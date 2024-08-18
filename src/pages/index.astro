@@ -6,20 +6,38 @@ import Layout from '../layouts/Layout.astro';
 import { getIsInLanus } from '../components/Location.astro';
 
 // Espera a que la función asincrónica se resuelva
-const isInLanus = true;
+const isInLanus = await getIsInLanus();
 ---
+<script>
+    // Función para obtener la ubicación
+    async function getIsInLanus() {
+        const response = await fetch('https://ipapi.co/json/');
+        const data = await response.json();
+        return data.city && data.city.toLowerCase() === 'lanús';
+    }
+
+    // Llama a la función al cargar la página
+    window.onload = async () => {
+        const isInLanus = await getIsInLanus();
+        if (isInLanus) {
+            console.log("Estás en Lanús");
+            // Aquí puedes agregar más lógica si es necesario
+        } else {
+            console.log("No estás en Lanús");
+        }
+    };
+</script>
 
 <Layout title="Astro Server Islands">
   <section>
     <h1>Astro Server Islands</h1>
-    {isInLanus ? ( 
+   {isInLanus ? ( 
       <Quote server:defer>
-        <Fallback slot="fallback" />
+        <Fallback slot="fallback"/>
       </Quote>
     ) : (
       <p>No estás en Lanús.</p>
     )}
-    <Panel />
+    <Panel/>
   </section>
 </Layout>
-

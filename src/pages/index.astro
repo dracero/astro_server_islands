@@ -26,12 +26,12 @@ import Layout from '../layouts/Layout.astro';
 </script>
 
 <Layout title="Astro Server Islands">
-  <section>
-    <h1>Astro Server Islands</h1>
-      <Quote server:defer>
-        <Fallback slot="fallback"/>
-      </Quote>
-      <div id="location-message"></div> <!-- Elemento para mostrar el mensaje -->
-    <Panel/>
-  </section>
-</Layout>
+    <section>
+      <h1>Astro Server Islands</h1>
+        <Quote server:defer>
+          <Fallback slot="fallback"/>
+        </Quote>
+        <div id="location-message"></div> <!-- Mensaje de ubicación dentro del slot de Quote -->
+      <Panel/>
+    </section>
+  </Layout>

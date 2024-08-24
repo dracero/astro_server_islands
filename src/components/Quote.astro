@@ -1,7 +1,9 @@
 ---
+const country = Astro.request.headers.get("X-Vercel-IP-country") ?? "CO"
 await new Promise(resolve => setTimeout(resolve, 3000));
 ---
 
 <blockquote>
   Este mensaje se muestra solo si estás en la ciudad correcta
+  Estás en {country}
 </blockquote>
